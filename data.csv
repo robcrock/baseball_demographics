@@ -1,0 +1,281 @@
+year,of_players,ethnicity,of_war
+1947,0.983,White,0.999
+1948,0.985,White,0.976
+1957,0.881,White,0.828
+1977,0.179,African American,0.272
+1978,0.174,African American,0.242
+1979,0.179,African American,0.242
+1980,0.174,African American,0.264
+1981,0.187,African American,0.26
+1982,0.179,African American,0.221
+1983,0.18,African American,0.258
+1984,0.184,African American,0.229
+1985,0.183,African American,0.242
+1986,0.183,African American,0.228
+1958,0.867,White,0.799
+1987,0.177,African American,0.206
+1988,0.173,African American,0.202
+1989,0.165,African American,0.224
+1990,0.166,African American,0.24
+1991,0.17,African American,0.224
+1992,0.167,African American,0.238
+1993,0.168,African American,0.212
+1994,0.172,African American,0.22
+1995,0.161,African American,0.18
+1996,0.16,African American,0.188
+1959,0.848,White,0.78
+1997,0.15,African American,0.167
+1998,0.143,African American,0.199
+1999,0.136,African American,0.158
+2000,0.128,African American,0.139
+2001,0.121,African American,0.127
+2002,0.108,African American,0.124
+2003,0.104,African American,0.117
+2004,0.101,African American,0.109
+2005,0.091,African American,0.113
+2006,0.09,African American,0.097
+1960,0.823,White,0.795
+2007,0.085,African American,0.116
+2008,0.082,African American,0.103
+2009,0.071,African American,0.118
+2010,0.078,African American,0.111
+2011,0.079,African American,0.129
+2012,0.072,African American,0.114
+2013,0.067,African American,0.077
+2014,0.067,African American,0.11
+2015,0.072,African American,0.116
+2016,0.067,African American,0.083
+1961,0.826,White,0.746
+1947,0.007,Latino,-0.003
+1948,0.007,Latino,-0.002
+1949,0.019,Latino,0.007
+1950,0.03,Latino,0.017
+1951,0.028,Latino,0.045
+1952,0.027,Latino,0.042
+1953,0.03,Latino,0.054
+1954,0.037,Latino,0.063
+1955,0.05,Latino,0.05
+1956,0.051,Latino,0.037
+1962,0.819,White,0.713
+1957,0.052,Latino,0.057
+1958,0.059,Latino,0.063
+1959,0.065,Latino,0.066
+1960,0.089,Latino,0.067
+1961,0.077,Latino,0.08
+1962,0.08,Latino,0.094
+1963,0.082,Latino,0.099
+1964,0.089,Latino,0.101
+1965,0.088,Latino,0.112
+1966,0.097,Latino,0.124
+1963,0.801,White,0.704
+1967,0.107,Latino,0.124
+1968,0.108,Latino,0.135
+1969,0.111,Latino,0.124
+1970,0.117,Latino,0.097
+1971,0.106,Latino,0.095
+1972,0.109,Latino,0.102
+1973,0.11,Latino,0.085
+1974,0.115,Latino,0.089
+1975,0.102,Latino,0.101
+1976,0.115,Latino,0.097
+1964,0.793,White,0.686
+1977,0.114,Latino,0.104
+1978,0.113,Latino,0.08
+1979,0.107,Latino,0.079
+1980,0.116,Latino,0.07
+1981,0.111,Latino,0.073
+1982,0.117,Latino,0.113
+1983,0.116,Latino,0.092
+1984,0.12,Latino,0.102
+1985,0.113,Latino,0.089
+1986,0.118,Latino,0.077
+1965,0.783,White,0.644
+1987,0.123,Latino,0.116
+1988,0.145,Latino,0.111
+1989,0.132,Latino,0.123
+1990,0.148,Latino,0.116
+1991,0.161,Latino,0.159
+1992,0.156,Latino,0.166
+1993,0.169,Latino,0.143
+1994,0.178,Latino,0.189
+1995,0.192,Latino,0.155
+1996,0.204,Latino,0.218
+1966,0.769,White,0.636
+1997,0.235,Latino,0.194
+1998,0.228,Latino,0.239
+1999,0.235,Latino,0.282
+2000,0.247,Latino,0.277
+2001,0.26,Latino,0.29
+2002,0.265,Latino,0.293
+2003,0.268,Latino,0.317
+2004,0.277,Latino,0.329
+2005,0.278,Latino,0.284
+2006,0.279,Latino,0.284
+1949,0.966,White,0.939
+1967,0.756,White,0.674
+2007,0.261,Latino,0.277
+2008,0.273,Latino,0.269
+2009,0.285,Latino,0.251
+2010,0.272,Latino,0.296
+2011,0.269,Latino,0.29
+2012,0.269,Latino,0.28
+2013,0.277,Latino,0.307
+2014,0.277,Latino,0.273
+2015,0.277,Latino,0.28
+2016,0.274,Latino,0.292
+1968,0.738,White,0.645
+1947,0,Asian,0
+1948,0,Asian,0
+1949,0,Asian,0
+1950,0,Asian,0
+1951,0,Asian,0
+1952,0,Asian,0
+1953,0,Asian,0
+1954,0,Asian,0
+1955,0,Asian,0
+1956,0,Asian,0
+1969,0.744,White,0.632
+1957,0,Asian,0
+1958,0,Asian,0
+1959,0,Asian,0
+1960,0,Asian,0
+1961,0,Asian,0
+1962,0,Asian,0
+1963,0,Asian,0
+1964,0.001,Asian,0.001
+1965,0.001,Asian,0.002
+1966,0,Asian,0
+1970,0.737,White,0.668
+1967,0,Asian,0
+1968,0,Asian,0
+1969,0,Asian,0
+1970,0,Asian,0
+1971,0,Asian,0
+1972,0,Asian,0
+1973,0,Asian,0
+1974,0,Asian,0
+1975,0,Asian,0
+1976,0,Asian,0
+1971,0.739,White,0.66
+1977,0,Asian,0
+1978,0,Asian,0
+1979,0,Asian,0
+1980,0,Asian,0
+1981,0,Asian,0
+1982,0,Asian,0
+1983,0,Asian,0
+1984,0,Asian,0
+1985,0,Asian,0
+1986,0,Asian,0
+1972,0.729,White,0.649
+1987,0,Asian,0
+1988,0,Asian,0
+1989,0,Asian,0
+1990,0,Asian,0
+1991,0.001,Asian,0
+1992,0,Asian,0
+1993,0,Asian,0
+1994,0.001,Asian,0
+1995,0.002,Asian,0.005
+1996,0.004,Asian,0.006
+1973,0.716,White,0.66
+1997,0.005,Asian,0.006
+1998,0.008,Asian,0.012
+1999,0.012,Asian,0.01
+2000,0.013,Asian,0.026
+2001,0.012,Asian,0.021
+2002,0.019,Asian,0.019
+2003,0.018,Asian,0.022
+2004,0.018,Asian,0.02
+2005,0.023,Asian,0.02
+2006,0.019,Asian,0.028
+1974,0.711,White,0.668
+2007,0.022,Asian,0.034
+2008,0.023,Asian,0.041
+2009,0.021,Asian,0.032
+2010,0.019,Asian,0.023
+2011,0.017,Asian,0.013
+2012,0.019,Asian,0.022
+2013,0.02,Asian,0.043
+2014,0.018,Asian,0.027
+2015,0.017,Asian,0.023
+2016,0.021,Asian,0.025
+1975,0.713,White,0.65
+1976,0.705,White,0.661
+1950,0.953,White,0.91
+1977,0.707,White,0.623
+1978,0.713,White,0.678
+1979,0.714,White,0.679
+1980,0.711,White,0.667
+1981,0.701,White,0.667
+1982,0.704,White,0.666
+1983,0.703,White,0.65
+1984,0.696,White,0.668
+1985,0.703,White,0.669
+1986,0.7,White,0.695
+1951,0.943,White,0.867
+1987,0.699,White,0.678
+1988,0.682,White,0.687
+1989,0.703,White,0.652
+1990,0.686,White,0.644
+1991,0.668,White,0.618
+1992,0.677,White,0.596
+1993,0.663,White,0.645
+1994,0.65,White,0.591
+1995,0.645,White,0.66
+1996,0.632,White,0.588
+1952,0.944,White,0.883
+1997,0.609,White,0.633
+1998,0.62,White,0.55
+1999,0.617,White,0.55
+2000,0.612,White,0.557
+2001,0.607,White,0.562
+2002,0.608,White,0.564
+2003,0.61,White,0.545
+2004,0.603,White,0.543
+2005,0.609,White,0.583
+2006,0.613,White,0.591
+1953,0.933,White,0.873
+2007,0.631,White,0.573
+2008,0.621,White,0.586
+2009,0.622,White,0.598
+2010,0.63,White,0.57
+2011,0.635,White,0.567
+2012,0.639,White,0.583
+2013,0.636,White,0.573
+2014,0.637,White,0.591
+2015,0.634,White,0.581
+2016,0.637,White,0.599
+1954,0.907,White,0.852
+1947,0.009,African American,0.004
+1948,0.007,African American,0.026
+1949,0.015,African American,0.054
+1950,0.017,African American,0.072
+1951,0.029,African American,0.088
+1952,0.029,African American,0.075
+1953,0.037,African American,0.074
+1954,0.056,African American,0.085
+1955,0.052,African American,0.127
+1956,0.067,African American,0.145
+1955,0.898,White,0.822
+1957,0.067,African American,0.115
+1958,0.074,African American,0.137
+1959,0.088,African American,0.154
+1960,0.089,African American,0.138
+1961,0.097,African American,0.174
+1962,0.101,African American,0.193
+1963,0.117,African American,0.197
+1964,0.117,African American,0.212
+1965,0.127,African American,0.242
+1966,0.134,African American,0.24
+1956,0.882,White,0.818
+1967,0.136,African American,0.202
+1968,0.154,African American,0.22
+1969,0.145,African American,0.244
+1970,0.146,African American,0.235
+1971,0.155,African American,0.246
+1972,0.161,African American,0.249
+1973,0.174,African American,0.255
+1974,0.174,African American,0.243
+1975,0.185,African American,0.25
+1976,0.18,African American,0.243
