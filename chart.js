@@ -106,6 +106,9 @@ class Chart {
   addArea() {
   ////////////////////////////////////////////////////////////////////////////////
   // SO BROKEN :(
+  // Trying to copy this http://blockbuilder.org/reinson/4edb6d60afd451e1cfaf6369f943bd7b
+  // This is all I want http://blockbuilder.org/FrissAnalytics/0257233f46d616a39bfdc6631395f555
+  // Working to recreate this http://tabsoft.co/2EJ9TMs
 
     const area = d3.area()
       .x(function (d, i) { return x(d.year); })
