@@ -4,6 +4,7 @@ class Chart {
     // load in arguments from config object
     console.log(opts);
     this.data = opts.data;
+    this.keys = opts.keys;
     this.layers = opts.layers;
     this.element = opts.element;
     // create the chart
@@ -33,11 +34,13 @@ class Chart {
     this.plot = svg.append('g')
       .attr('transform', `translate(${this.margin.left},${this.margin.top})`);
 
+    // Compute the stacked data.
+    this.stacked = d3.stack().keys(this.keys)(this.data);
+
     // create the other stuff
     this.createScales();
     this.addAxes();
     this.addArea();
-    this.addLine();
   }
 
   createScales() {
@@ -46,10 +49,10 @@ class Chart {
 
     // calculate max and min for data
     const xExtent = d3.extent(this.data, d => d.year);
-    const yExtent = d3.extent(this.data, d => d.percent_of_players);
-
-    // force zero baseline if all data points are positive
-    if (yExtent[0] > 0) { yExtent[0] = 0; };
+    const yExtent = [
+      d3.min(this.stacked, series => d3.min(series, d => d[0])),
+      d3.max(this.stacked, series => d3.max(series, d => d[1]))
+    ];
 
     this.xScale = d3.scaleTime()
       .range([0, this.innerWidth - m.right])
@@ -59,7 +62,7 @@ class Chart {
       .range([this.innerHeight - (m.top + m.bottom), 0])
       .domain(yExtent);
 
-    this.colorScale = d3.scaleOrdinal(d3.schemaCategory10);
+    this.colorScale = d3.scaleOrdinal(d3.schemeCategory10);
   }
 
   addAxes() {
@@ -104,65 +107,17 @@ class Chart {
   }
 
   addArea() {
-  ////////////////////////////////////////////////////////////////////////////////
-  // SO BROKEN :(
-  // Trying to copy this http://blockbuilder.org/reinson/4edb6d60afd451e1cfaf6369f943bd7b
-  // This is all I want http://blockbuilder.org/FrissAnalytics/0257233f46d616a39bfdc6631395f555
-  // Working to recreate this http://tabsoft.co/2EJ9TMs
-
-    const area = d3.area()
-      .x(function (d, i) { return x(d.year); })
-      .y0(function (d) { return y(d[0]); })
-      .y1(function (d) { return y(d[1]); });
-
-    const ethnicities = this.data.map(function(d) {
-      return d.key;
-    });
-
-    console.log(ethnicities);
-
-    // const stack = d3.stack()
-    //   .keys(ethnicities)(this.data.values);
-
-    console.log(this.data);
-
-    // let data = stack.keys(ethnicities)(this.layers.values);
-
-    // console.log(data);
-
-    const stackLayout = d3.stack()
-      .keys(ethnicities);
-
     const stackArea = d3.area()
-      .x((d, i) => this.xScale(i))
-      .y0(d => yScale(d[0]))
-      .y1(d => yScale(d[1]));
+      .x(d => this.xScale(d.data.year))
+      .y0(d => this.yScale(d[0]))
+      .y1(d => this.yScale(d[1]));
 
-
-    this.plot.selectAll('path')
-      .data(stack(this.data))
+    this.plot.selectAll('.area')
+      .data(this.stacked)
       .enter().append('path')
-        .style('fill', d => colorScale(d.key))
-        .attr('d', d => stackArea(d));
+        .attr('class', 'area')
+        .attr('fill', d => this.colorScale(d.key))
+        .attr('d', stackArea);
 
   }
-
-  addLine() {
-    const line = d3.line()
-      .x(d => this.xScale(d.year))
-      .y(d => this.yScale(d.percent_of_players));
-
-    this.plot.append('path')
-      // use data stored in `this`
-      .datum(this.data)
-      .classed('line', true)
-      .attr('d', line)
-      // set stroke to specified color, or default to red
-      .style('stroke', this.lineColor || 'red')
-      .style('stroke-width', '1px');
-  }
-
-  // the following are "public methods"
-  // which can be used by code outside of this file
-
 }
