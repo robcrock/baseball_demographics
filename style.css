@@ -1,8 +1,0 @@
-.line {
-    fill: none;
-    stroke-width: 4px;
-}
-.axis path, .tick line {
-    fill: none;
-    stroke: #333;
-}

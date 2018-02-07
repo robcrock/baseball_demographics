@@ -1,0 +1,28 @@
+.container {
+    width: 925px !important;
+    height: 800px !important;
+}
+.row {
+    margin-bottom: 0px;
+}
+h5 {
+    margin-right: 14px;
+    margin-bottom: 0px;
+}
+#time-period {
+    font-size: 14px;
+}
+.x.axis line,.x.axis path {
+    display: none;
+}
+.x.axis text {
+    font-size: 11px;
+    color: #777777;
+}
+.y.axis line,.y.axis path {
+    display: none;
+}
+.y.axis text {
+    font-size: 11px;
+    color: #777777;
+}

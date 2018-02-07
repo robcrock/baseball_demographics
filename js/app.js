@@ -1,5 +1,5 @@
-d3.csv('data.csv', function (error, data) {
-  
+d3.csv('data/data.csv', function (error, data) {
+
   if (error) throw error;
 
   ///////////////////////////////////////////
@@ -74,12 +74,12 @@ d3.csv('data.csv', function (error, data) {
 function initializeAreaChart(data, keys) {
   // create new chart using Chart constructor
   const chart = new Chart({
-    element: document.querySelector('.chart-container'),
+    element: document.querySelector('.container'),
     data: data,
     keys: keys
   });
   // redraw chart on each resize
   // in a real-world example, it might be worth ‘throttling’ this
   // more info: http://sampsonblog.com/749/simple-throttle-function
-  d3.select(window).on('resize', () => chart.draw());
+  // d3.select(window).on('resize', () => chart.draw());
 }

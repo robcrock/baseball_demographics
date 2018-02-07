@@ -2,17 +2,27 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!--Let browser know website is optimized for mobile-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <!-- load in D3 and Chart constructor scripts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.10.0/d3.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="style.css">
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" type="text/css" href="css/materialize.min.css">
+  <!-- Custom style sheet -->
+  <link rel="stylesheet" type="text/css" href="css/style.css">
   <title>Baseball Demographics</title>
-</head>
-<body>
+</head> 
+<body class='grey lighten-4'>
   <!-- here's the div our chart will be injected into -->
-  <div class="chart-container" style="max-width: 1000px;"></div>
-  <script src="chart.js"></script>
-  <script src="app.js"></script>
+  <div class="container grey-text text-darken-1">
+    <div class="row">
+      <h5 class='right-align'>BASEBALL DEMOGRAPHICS <span id="time-period">[1947 TO 2016]</span></h5>
+    </div>
+  </div>
+  <!--JavaScript at end of body for optimized loading-->
+  <script src="js/materialize.min.js"></script>
+  <!-- Custom JavaScript code -->
+  <script src="js/chart.js"></script>
+  <script src="js/app.js"></script>
 </body>
 </html>

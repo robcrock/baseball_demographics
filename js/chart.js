@@ -12,11 +12,11 @@ class Chart {
  
   draw() {
     // define width, height and margin
-    this.width = this.element.offsetWidth;
-    this.height = this.width / 2;
+    this.width = 925; // this.element.offsetWidth;
+    this.height = 700; // this.width / 2;
     this.margin = {
-      top: 20,
-      right: 75,
+      top: 10,
+      right: 5,
       bottom: 45,
       left: 50
     };
@@ -24,7 +24,7 @@ class Chart {
     this.innerWidth = this.width - (this.margin.right + this.margin.left);
 
     // set up parent element and SVG
-    this.element.innerHTML = '';
+    // this.element.innerHTML = '';
     const svg = d3.select(this.element).append('svg');
     svg.attr('width', this.width);
     svg.attr('height', this.height);
@@ -71,47 +71,52 @@ class Chart {
     // ]
     this.colorScale = d3.scaleOrdinal(['#A7ACB4', '#CBDB97', '#FD7F8B', '#78D9D5', '#F8D06D']);
 
-    console.log(d3.schemeCategory10);
   }
 
   addAxes() {
     const m = this.margin;
 
+    // Ticks should be #666666
+
     // create and append axis elements
     // this is all pretty straightforward D3 stuff
     const xAxis = d3.axisBottom()
       .scale(this.xScale)
-      .ticks(10);
+      .ticks(10)
+      .tickSize('9');
 
     const yAxis = d3.axisLeft()
       .scale(this.yScale)
-      .tickFormat(d3.format(",.0%"));
+      .tickValues([0, .25, .5, .75, 1])
+      .tickFormat(d3.format(",.0%"))
+      .tickSize('9');
 
     this.plot.append("g")
       .attr("class", "x axis")
-      .attr("transform", `translate(0, ${this.innerHeight - (m.top + m.bottom)})`)
+      .attr("transform", `translate(0, ${this.innerHeight - (m.top + m.bottom) - 5})`)
       .call(xAxis);
 
     // Add x-axis title
     d3.select('.x.axis').append('text')
-      .attr('x', this.width / 2)
+      .attr('x', this.innerWidth / 2)
       .attr('y', 40)
-      .text('Years')
-      .style('fill', '#666666')
+      .text('YEARS')
+      .style('fill', '#333333')
       .style('font-size', '14px');
 
     this.plot.append("g")
       .attr("class", "y axis")
+      .attr("transform", 'translate(5, 0)')
       .call(yAxis)
 
     // A y-axis title
     d3.select('.y.axis').append('text')
-      .attr('x', -this.innerHeight / 2)
-      .attr('y', -35)
+      .attr('x', -this.innerHeight / 2 + 25)
+      .attr('y', -45)
       .attr('transform', `rotate(-90 0 0)`)
-      .text('Demographic Mix')
+      .text('DEMOGRAPHIC MIX')
       .style('text-anchor', 'middle')
-      .style('fill', '#666666')
+      .style('fill', '#333333')
       .style('font-size', '14px');
   }
 
