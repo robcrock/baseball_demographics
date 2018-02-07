@@ -12,8 +12,8 @@ class Chart {
  
   draw() {
     // define width, height and margin
-    this.width = 925; // this.element.offsetWidth;
-    this.height = 700; // this.width / 2;
+    this.width = 800; // this.element.offsetWidth;
+    this.height = 600; // this.width / 2;
     this.margin = {
       top: 10,
       right: 5,
@@ -40,7 +40,7 @@ class Chart {
     this.createScales();
     this.addAxes();
     this.addArea();
-    // this.addLabels();
+    this.addLabels();
   }
 
   createScales() {
@@ -64,13 +64,14 @@ class Chart {
 
     // Colors Ann Jackson used
     // [
-    //   White '#A7ACB4',
-    //   Asian '#CBDB97',
-    //   Latino '#FD7F8B',
-    //   African American '#78D9D5',
-    //   Non-white '#F8D06D'
+    //   White            text : '#A7ACB4', area : '#D3D5D9'
+    //   Asian            text : '#909C6B', area : '#CBDB97'
+    //   Latino           text : '#FD7F8B', area : '#FEBFC5'
+    //   African American text : '#78D9D5', area : '#BFDFDE'
+    //   Non-white        text : '#F8D06D', area : '#FBE7B6'
     // ]
-    this.colorScale = d3.scaleOrdinal(['#A7ACB4', '#CBDB97', '#FD7F8B', '#78D9D5', '#F8D06D']);
+    this.areaColorScale = d3.scaleOrdinal(['#D3D5D9', '#CBDB97', '#FEBFC5', '#BFDFDE', '#FBE7B6']);
+    this.textColorScale = d3.scaleOrdinal(['#A7ACB4', '#909C6B', '#FD7F8B', '#78D9D5', '#F8D06D']);
 
   }
 
@@ -95,6 +96,7 @@ class Chart {
     this.plot.append("g")
       .attr("class", "x axis")
       .attr("transform", `translate(0, ${this.innerHeight - (m.top + m.bottom) - 5})`)
+      .attr('fill', '#cccccc')
       .call(xAxis);
 
     // Add x-axis title
@@ -102,7 +104,7 @@ class Chart {
       .attr('x', this.innerWidth / 2)
       .attr('y', 40)
       .text('YEARS')
-      .style('fill', '#333333')
+      .style('fill', '#cccccc')
       .style('font-size', '14px');
 
     this.plot.append("g")
@@ -117,12 +119,12 @@ class Chart {
       .attr('transform', `rotate(-90 0 0)`)
       .text('DEMOGRAPHIC MIX')
       .style('text-anchor', 'middle')
-      .style('fill', '#333333')
+      .style('fill', '#c3c3c3')
       .style('font-size', '14px');
   }
 
   addArea() {
-    const stackArea = d3.area()
+    this.stackArea = d3.area()
       .x(d => this.xScale(d.data.year))
       .y0(d => this.yScale(d[0]))
       .y1(d => this.yScale(d[1]));
@@ -131,32 +133,20 @@ class Chart {
       .data(this.stacked)
       .enter().append('path')
         .attr('class', 'area')
-        .attr('fill', d => this.colorScale(d.key))
-        .attr('d', stackArea);
+        .attr('fill', d => this.areaColorScale(d.key))
+        .attr('d', this.stackArea);
+  }
 
-    console.log(this.stacked);
-
+  addLabels() {
     const labels = this.plot.selectAll('.area-label')
       .data(this.stacked)
 
-    console.log(labels);
-
     labels
-      .enter().append('text')
-      .attr('class', 'area-label')
-      .merge(labels)
-      .text(d => d.key)
-      .attr('transform', d3.areaLabel(stackArea))
+        .enter().append('text')
+        .attr('class', 'area-label')
+        .merge(labels)
+        .text(d => d.key)
+        .style('fill', d => this.textColorScale(d.key))
+        .attr('transform', d3.areaLabel(this.stackArea))
   }
-
-  // addLabels() {
-  //   const labels = this.plot.selectAll('text').data(this.stacked)
-
-  //   labels
-  //     .enter().append('text')
-  //     .attr('class', 'area-label')
-  //     .merge(labels)
-  //     .text(d => d.key)
-  //     .attr('transform', d3.areaLabel(stackArea))
-  // }
 }
