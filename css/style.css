@@ -17,10 +17,12 @@ h6 {
 }
 .x.axis text {
     font-size: 14px;
+    fill: #bbbbbb;
 }
 .y.axis line,.y.axis path {
     display: none;
 }
 .y.axis text {
     font-size: 14px;
+    fill: #bbbbbb;
 }

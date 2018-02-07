@@ -104,8 +104,8 @@ class Chart {
       .attr('x', this.innerWidth / 2)
       .attr('y', 40)
       .text('YEARS')
-      .style('fill', '#cccccc')
-      .style('font-size', '14px');
+      .style('fill', '#999999')
+      .style('font-size', '12px');
 
     this.plot.append("g")
       .attr("class", "y axis")
@@ -119,8 +119,8 @@ class Chart {
       .attr('transform', `rotate(-90 0 0)`)
       .text('DEMOGRAPHIC MIX')
       .style('text-anchor', 'middle')
-      .style('fill', '#c3c3c3')
-      .style('font-size', '14px');
+      .style('fill', '#999999')
+      .style('font-size', '12px');
   }
 
   addArea() {
