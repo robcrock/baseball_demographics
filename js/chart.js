@@ -40,6 +40,7 @@ class Chart {
     this.createScales();
     this.addAxes();
     this.addArea();
+    // this.addLabels();
   }
 
   createScales() {
@@ -133,5 +134,29 @@ class Chart {
         .attr('fill', d => this.colorScale(d.key))
         .attr('d', stackArea);
 
+    console.log(this.stacked);
+
+    const labels = this.plot.selectAll('.area-label')
+      .data(this.stacked)
+
+    console.log(labels);
+
+    labels
+      .enter().append('text')
+      .attr('class', 'area-label')
+      .merge(labels)
+      .text(d => d.key)
+      .attr('transform', d3.areaLabel(stackArea))
   }
+
+  // addLabels() {
+  //   const labels = this.plot.selectAll('text').data(this.stacked)
+
+  //   labels
+  //     .enter().append('text')
+  //     .attr('class', 'area-label')
+  //     .merge(labels)
+  //     .text(d => d.key)
+  //     .attr('transform', d3.areaLabel(stackArea))
+  // }
 }
