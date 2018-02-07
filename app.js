@@ -1,13 +1,14 @@
 d3.csv('data.csv', function (error, data) {
+  
   if (error) throw error;
 
-////////////////////////////////////////////////////////////////////////////////
-// PROCESS THE DATA TO MATCH OUR AREA CHART
-// http://d3-wiki.readthedocs.io/zh_CN/master/Stack-Layout/
+  ///////////////////////////////////////////
+  // PROCESS THE DATA TO MATCH OUR AREA CHART
+  // https://github.com/d3/d3-shape#_stack
 
-  // Start by sorting our data so the lines look right
+  // Start by sorting the years so the don't get jumbled
   data.sort((a, b) => {
-    return a.year - b.year;
+    return +a.year - +b.year;
   })
 
   // Convert our data into the proper data types
@@ -22,13 +23,20 @@ d3.csv('data.csv', function (error, data) {
   // We need keys for each demographic
   const nested = d3.nest()
     .key(d => d.year)
-
-    // Nest gives us an array of entries for each year,
-    // each entry corresponding to one ethnicity.
-    // BUT, d3.stack needs to have an object instead,
-    // where each ethnicity is key on the object,
-    // and the percentage of is the value.
-    // So, we need to convert these arrays to objects:
+    // d3.stack needs an array of keys for each year whos values
+    // are an array of objects with ethnicity as the key and the
+    // percentage its value.
+    //
+    // [{
+    //    key: 1970,
+    //    values: {
+    //      white: .9,
+    //      african-american: .05,
+    //      asian: .3,
+    //      latino: .02
+    //    },...
+    //  }]
+    //
     .rollup(array => {
       const object = {};
       array.forEach(entry => {
@@ -36,29 +44,19 @@ d3.csv('data.csv', function (error, data) {
       });
       return object;
     })
-    
-    // Another more concise but cryptic way to do the same rollup thing:
-    // .rollup(array => array.reduce((object, entry) => {
-    //   object[entry.ethnicity] = entry.percent_of_players;
-    //   return object;
-    // }, {}))
-
     .entries(baseballDemographics);
 
-  // Determine the set of ethnicities.
-  const keys = Object.keys(nested[0].value);
+  // This could have been done programatically, but I am going
+  // for a specific ordering of the layers, so I'll specify that // here.
+  const keys = ['White', 'Asian', 'Latino', 'African American'];
 
   // Flatten the nested data structure into an
-  // array of objects, one object for each year,
-  // so we can pass this array into d3.stack.
+  // array of objects to pass this array into d3.stack.
   const stackable = nested.map(entry => {
-
     // We parse the year into a date here,
     // because if we do this earlier,
-    // it gets converted from a Date to a String by d3.nest.
+    // it gets converted to a String by d3.nest.
     entry.value.year = new Date(entry.key);
-
-    // Each of these objects looks something like this:
     // {
     //   year: new Date(...)
     //   Latino: 0.05,

@@ -2,7 +2,6 @@ class Chart {
 
   constructor(opts) {
     // load in arguments from config object
-    console.log(opts);
     this.data = opts.data;
     this.keys = opts.keys;
     this.layers = opts.layers;
@@ -10,7 +9,7 @@ class Chart {
     // create the chart
     this.draw();
   }
-
+ 
   draw() {
     // define width, height and margin
     this.width = this.element.offsetWidth;
@@ -62,7 +61,17 @@ class Chart {
       .range([this.innerHeight - (m.top + m.bottom), 0])
       .domain(yExtent);
 
-    this.colorScale = d3.scaleOrdinal(d3.schemeCategory10);
+    // Colors Ann Jackson used
+    // [
+    //   White '#A7ACB4',
+    //   Asian '#CBDB97',
+    //   Latino '#FD7F8B',
+    //   African American '#78D9D5',
+    //   Non-white '#F8D06D'
+    // ]
+    this.colorScale = d3.scaleOrdinal(['#A7ACB4', '#CBDB97', '#FD7F8B', '#78D9D5', '#F8D06D']);
+
+    console.log(d3.schemeCategory10);
   }
 
   addAxes() {
