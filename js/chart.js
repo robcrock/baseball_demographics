@@ -18,7 +18,7 @@ class Chart {
       top: 10,
       right: 5,
       bottom: 45,
-      left: 50
+      left: 55
     };
     this.innerHeight = this.height - (this.margin.top + this.margin.bottom);
     this.innerWidth = this.width - (this.margin.right + this.margin.left);
@@ -115,7 +115,7 @@ class Chart {
     // A y-axis title
     d3.select('.y.axis').append('text')
       .attr('x', -this.innerHeight / 2 + 25)
-      .attr('y', -45)
+      .attr('y', -50)
       .attr('transform', `rotate(-90 0 0)`)
       .text('DEMOGRAPHIC MIX')
       .style('text-anchor', 'middle')
