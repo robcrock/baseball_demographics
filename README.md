@@ -1,20 +1,20 @@
 
 # Makeover Monday - Week 6
 
-### Original visualization!
-[Original visualization](https://raw.githubusercontent.com/robcrock/baseball_demographics/master/images/original.png)
+### Original visualization
+![Original visualization](https://raw.githubusercontent.com/robcrock/baseball_demographics/master/images/original.png)
 
 The Society for American Baseball created a 100% area chart displaying the pecent share between four ethnicities: White, African American, Asian, and Latino from 1947 to 2016. In honor of Black History month the #MakeoverMonday community is taking a stab at presenting this data differently to explore a few more ways one might looks at this data.
 
 Instead of doing a pure makeover of the original visualization this week I want to remake [Ann Jackson's](https://twitter.com/AnnUJackson) visualization in D3.js. Why recreate the wheel, when Ann's done such a good job of making a beautiful display of the data already 😍
 
-### Ann's Visualization!
-[Ann's Visualization](https://raw.githubusercontent.com/robcrock/baseball_demographics/master/images/ann_remake.png)
+### Ann's Visualization
+![Ann's Visualization](https://raw.githubusercontent.com/robcrock/baseball_demographics/master/images/ann_remake.png)
 
 Now, I might not get to all the cool interactivey in her Tableau viz, but I can at least create **another** good looking area chart. D3 is another animal when it come to visualizing data. By remaking others work we can get some good training laps in with this powerful JavaScript library.
 
-### What I did!
-[Your visualizaiton](https://raw.githubusercontent.com/robcrock/baseball_demographics/master/images/my_remake.png)
+### What I did
+![Your visualizaiton](https://raw.githubusercontent.com/robcrock/baseball_demographics/master/images/my_remake.png)
 
 What's going on here:
 * Stack Layout
