@@ -54,7 +54,7 @@ class areaChart {
     this.addArea();
     this.addLabels();
     this.addHighlightBar();
-    // this.addHighlightText();
+    this.addHighlightText();
 
   }
 
@@ -193,6 +193,7 @@ class areaChart {
           });
         });
 
+        // Set bar context
         const highlightBars = this.plot.selectAll('.highlight')
           .data(column);
 
@@ -244,9 +245,13 @@ class areaChart {
         .attr('class', 'highlightText')
         .style('pointer-events', 'none');
 
+      // format to two decimal places
+      const twoDecimals = d3.format(".2f");
+
       highlightText.merge(highlightTextEnter)
         .attr('x', this.xScale(key))
-        .attr('y', d => (this.yScale(d[0]) - this.yScale(d[1])) / 2);
+        .attr('y', d => this.yScale(((d[1] - d[0]) / 2) + d[0])) // - d[0]))
+        .text(d => twoDecimals(((d[1] - d[0]) / 2) + d[0])) //'Hello'); // `${key} : ${d.data.i}` );
 
     })
     .on('mouseout', () => {
