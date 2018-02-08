@@ -38,7 +38,8 @@ class areaChart {
 
     // We need to create an array of keys for the
     // stack data structure
-    let key = getKeys(this.data[0]);
+    // console.log(Object.keys(this.data[0]).slice(1));
+    let key = Object.keys(this.data[0]).slice(1);
     
 
     // Compute the stacked data.
@@ -51,22 +52,6 @@ class areaChart {
     this.addAxes();
     this.addArea();
     this.addLabels();
-
-    // Function to create the array of keys
-    function getKeys(singleObject) {
-      let keyArray = [],
-        key,
-        i = 0;
-
-      for (key in singleObject) {
-        if (i !== 0) {
-          keyArray.push(key);
-        }
-        i++
-      }
-
-      return keyArray;
-    }
 
   }
 
@@ -183,5 +168,5 @@ class areaChart {
         .style('fill', d => this.textColorScale(d.key))
         .attr('transform', d3.areaLabel(this.stackArea))
   }
-  
+
 }
