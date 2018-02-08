@@ -52,6 +52,7 @@ class areaChart {
     this.addAxes();
     this.addArea();
     this.addLabels();
+    this.addInteraction();
 
   }
 
@@ -66,7 +67,7 @@ class areaChart {
       d3.max(this.stacked, series => d3.max(series, d => d[1]))
     ];
 
-    this.xScale = d3.scaleTime()
+    this.xScale = d3.scaleLinear()
       .range([0, this.innerWidth - m.right])
       .domain(xExtent);
 
@@ -167,6 +168,47 @@ class areaChart {
         .text(d => d.key)
         .style('fill', d => this.textColorScale(d.key))
         .attr('transform', d3.areaLabel(this.stackArea))
+  }
+
+  addInteraction() {
+    // Interact!
+    this.plot.selectAll('.area,.area-label')
+      .on('mouseenter', () => {
+        //this.plot.append('rect')
+        //  .attr('class', 'hovered-line')
+        //  ;
+      })
+      .on('mousemove', () => {
+        const mouseCoordinates = d3.mouse(this.plot.node());
+        const mouseX = mouseCoordinates[0];
+        const year = Math.round(this.xScale.invert(mouseX));
+
+        const hoveredLines = this.plot.selectAll('.hovered-line')
+          .data(this.stacked);
+
+        const hoveredLinesEnter = hoveredLines.enter().append('rect')
+          .attr('class', 'hovered-line')
+          .attr('stroke-width', 1)
+          .style('pointer-events', 'none')
+          .attr('stroke', 'black');
+
+        hoveredLines.merge(hoveredLinesEnter)
+          .attr('fill', d => this.areaColorScale(d.key))
+          .attr('x', this.xScale(year))
+          .attr('y', layer => {
+            const d = layer.filter(yearEntry => yearEntry.data.year == year)[0];
+            return this.yScale(d[1]);
+          })
+          .attr('width', (this.xScale.domain()[1] - this.xScale.domain()[0]) / this.innerWidth + 5)
+          .attr('height', layer => {
+            const d = layer.filter(yearEntry => yearEntry.data.year == year)[0];
+            return this.yScale(d[0]) - this.yScale(d[1]);
+          });
+
+      })
+      .on('mouseout', () => {
+        this.plot.select('.hovered-line').remove();
+      });
   }
 
 }
