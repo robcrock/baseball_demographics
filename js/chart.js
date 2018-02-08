@@ -53,7 +53,8 @@ class areaChart {
     this.addAxes();
     this.addArea();
     this.addLabels();
-    this.addHighlight();
+    this.addHighlightBar();
+    // this.addHighlightText();
 
   }
 
@@ -171,7 +172,7 @@ class areaChart {
         .attr('transform', d3.areaLabel(this.stackArea))
   }
 
-  addHighlight() {
+  addHighlightBar() {
     // Interact!
     this.plot.selectAll('.area,.area-label')
       .on('mousemove', () => {
@@ -192,15 +193,14 @@ class areaChart {
           });
         });
 
-        const hoveredLines = this.plot.selectAll('.highlight')
+        const highlightBars = this.plot.selectAll('.highlight')
           .data(column);
 
-        const hoveredLinesEnter = hoveredLines.enter().append('rect')
+        const highlightBarsEnter = highlightBars.enter().append('rect')
           .attr('class', 'highlight')
           .style('pointer-events', 'none');
 
-        hoveredLines.merge(hoveredLinesEnter)
-          // .attr('fill', (d, i) => this.areaColorScale(this.keys))
+        highlightBars.merge(highlightBarsEnter)
           .attr('x', this.xScale(key))
           .attr('y', d => this.yScale(d[1]))
           .attr('width', this.innerWidth / (this.xScale.domain()[1] - this.xScale.domain()[0]))
@@ -211,6 +211,47 @@ class areaChart {
       .on('mouseout', () => {
         this.plot.selectAll('.highlight').remove();
       });
+  }
+
+  addHighlightText() {
+    // Interact!
+    this.plot.selectAll('.area,.area-label')
+
+    .on('mousemove', () => {
+      const mouseCoordinates = d3.mouse(this.plot.node());
+      const mouseX = mouseCoordinates[0];
+      const key = Math.round(this.xScale.invert(mouseX));
+      const columnScale = d3.scaleLinear()
+        .domain([1947, 2016])
+        .range([0, 69]);
+
+      // Filter to only the position under our mouse
+      let column = []
+      this.series.map(function (series) {
+        series.forEach(function (entry, i) {
+          if (i === columnScale(key)) {
+            column.push(entry);
+          }
+        });
+      });
+
+      // WFT Why can't I see the text? It's an element in the DOM
+      // but I can see the text on show up on the screen. Am I blind?
+      const highlightText = this.plot.selectAll('.highlightText')
+        .data(column);
+
+      const highlightTextEnter = highlightText.enter().append('text')
+        .attr('class', 'highlightText')
+        .style('pointer-events', 'none');
+
+      highlightText.merge(highlightTextEnter)
+        .attr('x', this.xScale(key))
+        .attr('y', d => (this.yScale(d[0]) - this.yScale(d[1])) / 2);
+
+    })
+    .on('mouseout', () => {
+      this.plot.selectAll('.highlightText').remove();
+    });
   }
 
 }
