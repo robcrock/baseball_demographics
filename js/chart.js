@@ -188,9 +188,7 @@ class areaChart {
 
         const hoveredLinesEnter = hoveredLines.enter().append('rect')
           .attr('class', 'hovered-line')
-          .attr('stroke-width', 1)
-          .style('pointer-events', 'none')
-          .attr('stroke', 'black');
+          .style('pointer-events', 'none');
 
         hoveredLines.merge(hoveredLinesEnter)
           .attr('fill', d => this.areaColorScale(d.key))
@@ -203,7 +201,8 @@ class areaChart {
           .attr('height', layer => {
             const d = layer.filter(yearEntry => yearEntry.data.year == year)[0];
             return this.yScale(d[0]) - this.yScale(d[1]);
-          });
+          })
+          .attr('fill', d => this.textColorScale(d.key));
 
       })
       .on('mouseout', () => {
