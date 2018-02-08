@@ -39,20 +39,21 @@ class areaChart {
     // We need to create an array of keys for the
     // stack data structure
     // console.log(Object.keys(this.data[0]).slice(1));
-    let key = Object.keys(this.data[0]).slice(1);
+    this.keyArray = Object.keys(this.data[0]).slice(1);
     
 
-    // Compute the stacked data.
-    this.stacked = d3.stack().keys(key)(this.data);
+    // Compute the series data.
+    const stack = d3.stack()
+      .keys(this.keyArray);
 
-    // console.log(this.stacked);
+    this.series = stack(this.data);
 
     // create the other stuff
     this.createScales();
     this.addAxes();
     this.addArea();
     this.addLabels();
-    this.addInteraction();
+    this.addHighlight();
 
   }
 
@@ -63,8 +64,8 @@ class areaChart {
     // calculate max and min for data
     const xExtent = d3.extent(this.data, d => d.year);
     const yExtent = [
-      d3.min(this.stacked, series => d3.min(series, d => d[0])),
-      d3.max(this.stacked, series => d3.max(series, d => d[1]))
+      d3.min(this.series, series => d3.min(series, d => d[0])),
+      d3.max(this.series, series => d3.max(series, d => d[1]))
     ];
 
     this.xScale = d3.scaleLinear()
@@ -148,7 +149,7 @@ class areaChart {
       .y1(d => this.yScale(d[1]));
 
     this.plot.selectAll('.area')
-      .data(this.stacked)
+      .data(this.series)
       .enter().append('path')
         .attr('class', 'area')
         .attr('fill', d => this.areaColorScale(d.key))
@@ -159,7 +160,7 @@ class areaChart {
   addLabels() {
 
     const labels = this.plot.selectAll('.area-label')
-      .data(this.stacked)
+      .data(this.series)
 
     labels
         .enter().append('text')
@@ -170,43 +171,45 @@ class areaChart {
         .attr('transform', d3.areaLabel(this.stackArea))
   }
 
-  addInteraction() {
+  addHighlight() {
     // Interact!
     this.plot.selectAll('.area,.area-label')
-      .on('mouseenter', () => {
-        //this.plot.append('rect')
-        //  .attr('class', 'hovered-line')
-        //  ;
-      })
       .on('mousemove', () => {
         const mouseCoordinates = d3.mouse(this.plot.node());
         const mouseX = mouseCoordinates[0];
-        const year = Math.round(this.xScale.invert(mouseX));
+        const key = Math.round(this.xScale.invert(mouseX));
+        const columnScale = d3.scaleLinear()
+          .domain([1947, 2016])
+          .range([0, 69]);
 
-        const hoveredLines = this.plot.selectAll('.hovered-line')
-          .data(this.stacked);
+        // Filter to only the position under our mouse
+        let column = []
+        this.series.map(function(series) {
+          series.forEach(function(entry, i) {
+            if (i === columnScale(key)) {
+              column.push(entry);
+            }
+          });
+        });
+
+        const hoveredLines = this.plot.selectAll('.highlight')
+          .data(column);
 
         const hoveredLinesEnter = hoveredLines.enter().append('rect')
-          .attr('class', 'hovered-line')
+          .attr('class', 'highlight')
           .style('pointer-events', 'none');
 
         hoveredLines.merge(hoveredLinesEnter)
-          .attr('fill', d => this.areaColorScale(d.key))
-          .attr('x', this.xScale(year))
-          .attr('y', layer => {
-            const d = layer.filter(yearEntry => yearEntry.data.year == year)[0];
-            return this.yScale(d[1]);
-          })
-          .attr('width', (this.xScale.domain()[1] - this.xScale.domain()[0]) / this.innerWidth + 5)
-          .attr('height', layer => {
-            const d = layer.filter(yearEntry => yearEntry.data.year == year)[0];
-            return this.yScale(d[0]) - this.yScale(d[1]);
-          })
-          .attr('fill', d => this.textColorScale(d.key));
+          // .attr('fill', (d, i) => this.areaColorScale(this.keys))
+          .attr('x', this.xScale(key))
+          .attr('y', d => this.yScale(d[1]))
+          .attr('width', this.innerWidth / (this.xScale.domain()[1] - this.xScale.domain()[0]))
+          .attr('height', d => this.yScale(d[0]) - this.yScale(d[1]))
+          .attr('fill', (d,i) => this.textColorScale(this.keyArray[i]));
 
       })
       .on('mouseout', () => {
-        this.plot.select('.hovered-line').remove();
+        this.plot.select('.highlight').remove();
       });
   }
 
