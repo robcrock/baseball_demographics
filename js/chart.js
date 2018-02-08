@@ -209,7 +209,7 @@ class areaChart {
 
       })
       .on('mouseout', () => {
-        this.plot.select('.highlight').remove();
+        this.plot.selectAll('.highlight').remove();
       });
   }
 
