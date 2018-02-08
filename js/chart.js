@@ -1,4 +1,4 @@
-class Chart {
+class areaChart {
 
   constructor(opts) {
     // load in arguments from config object
@@ -85,13 +85,12 @@ class Chart {
     const xAxis = d3.axisBottom()
       .scale(this.xScale)
       .ticks(10)
-      .tickSize('9');
+      .tickFormat(d3.format(''));
 
     const yAxis = d3.axisLeft()
       .scale(this.yScale)
       .tickValues([0, .25, .5, .75, 1])
-      .tickFormat(d3.format(",.0%"))
-      .tickSize('9');
+      .tickFormat(d3.format(",.0%"));
 
     this.plot.append("g")
       .attr("class", "x axis")
