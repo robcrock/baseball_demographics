@@ -246,13 +246,18 @@ class areaChart {
         .style('pointer-events', 'none');
 
       // format to two decimal places
-      const twoDecimals = d3.format(".2f");
+      const decimalFormat = d3.format(".0%");
 
       highlightText.merge(highlightTextEnter)
         .attr('x', this.xScale(key))
-        .attr('y', d => this.yScale(((d[1] - d[0]) / 2) + d[0])) // - d[0]))
-        .text(d => twoDecimals(((d[1] - d[0]) / 2) + d[0])) //'Hello'); // `${key} : ${d.data.i}` );
-
+        .attr('y', d => this.yScale(((d[1] - d[0]) / 2) + d[0]))
+        .text(d => {
+          if ( d[1] - d[0] >= .005 ) {
+            return decimalFormat(d[1] - d[0]);
+          }
+        })
+        .attr('dy', '4px')
+        .attr('text-anchor', 'middle')
     })
     .on('mouseout', () => {
       this.plot.selectAll('.highlightText').remove();
