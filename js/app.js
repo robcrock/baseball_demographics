@@ -12,7 +12,6 @@ function initializeChart(data, keys) {
   // create new chart using Chart constructor
   const chart = new areaChart({
     element: document.querySelector('.container'),
-    data: data,
-    keys: keys
+    data: data
   });
 }

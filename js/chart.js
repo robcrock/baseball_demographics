@@ -2,10 +2,8 @@ class areaChart {
 
   constructor(opts) {
     // load in arguments from config object
-    this.data = opts.data;
-    this.keys = opts.keys;
-    this.layers = opts.layers;
     this.element = opts.element;
+    this.data = opts.data;
     // create the chart
     this.draw();
   }
@@ -33,8 +31,29 @@ class areaChart {
     this.plot = svg.append('g')
       .attr('transform', `translate(${this.margin.left},${this.margin.top})`);
 
+    let key = getKeys(this.data[0]);
+
+    console.log(key);
+
+    function getKeys(singleObject) {
+      let keyArray = [],
+        key,
+        i = 0;
+
+      for (key in singleObject) {
+        if (i !== 0) {
+          keyArray.push(key);
+        }
+        i++
+      }
+
+      return keyArray;
+    }
+
     // Compute the stacked data.
-    this.stacked = d3.stack().keys(this.keys)(this.data);
+    this.stacked = d3.stack().keys(key)(this.data);
+
+    console.log(this.stacked);
 
     // create the other stuff
     this.createScales();
@@ -123,6 +142,7 @@ class areaChart {
   }
 
   addArea() {
+
     this.stackArea = d3.area()
       .x(d => this.xScale(d.data.year))
       .y0(d => this.yScale(d[0]))
@@ -134,6 +154,7 @@ class areaChart {
         .attr('class', 'area')
         .attr('fill', d => this.areaColorScale(d.key))
         .attr('d', this.stackArea);
+
   }
 
   addLabels() {
